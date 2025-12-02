@@ -188,7 +188,7 @@ function openPopup(day){
     case 9: box.innerHTML+=`<h2>Jour 9</h2><p>Contenu à ajouter.</p>`; break;
     case 10: box.innerHTML+=`<h2>Jour 10</h2><p>Contenu à ajouter.</p>`; break;
     case 11: box.innerHTML+=`<h2>Jour 11</h2><p>Contenu à ajouter.</p>`; break;
-    case 12: box.innerHTML+=`<h2>Jour 12</h2><p><strong>En lumière :</strong> Nous avons 2 ruches pour la biodiversité 🍯🐝</p>
+    case 12: box.innerHTML+=`<h2>Jour 12</h2><p><strong>En lumière :</strong> Nous avons 2 ruches aux Marsauderies pour la biodiversité 🍯🐝 et nous avons reçu des pots de miel.<p>Quiz : à votre avis, combien une abeille produit-elle de miel au cours de sa vie ? (g)</p>
       <input type="text" id="quiz12Input" placeholder="Votre réponse">
       <button type="button" onclick="checkOpenAnswer12()">Valider</button>
       <p id="quiz12Result"></p>`; break;
