@@ -1,73 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
 <meta charset="UTF-8">
-<title>🎄 Calendrier de l'Avent 🎄</title>
+<title>Calendrier de l'Avent</title>
+
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background: #064E3B;
-  color: #fff;
-  text-align: center;
-  margin:0;
-  padding:20px;
-  overflow: hidden;
-}
-h1 {
-  margin-top: 0;
-  font-size: 48px;
-  color: #FFD700;
-  text-shadow: 3px 3px 10px #000;
-  animation: glow 2s infinite alternate;
-}
-@keyframes glow { from { text-shadow: 0 0 10px red; } to { text-shadow: 0 0 25px yellow; } }
+    body {
+        font-family: Arial, sans-serif;
+        background: #1a1a1a;
+        color: white;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+    }
 
-// Date du jour réel
-const today = new Date();
-const currentDay = today.getDate(); // Numéro du jour : 1,2,3...
+    h1 {
+        font-size: 3em;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px #fff;
+    }
 
-// Générer les cases 1 à 24
-const calendar = document.getElementById('calendar');
-for(let i=1;i<=24;i++){
-  const dayDiv = document.createElement('div');
-  dayDiv.className = 'day';
+    #calendar {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 10px;
+        max-width: 700px;
+        margin: auto;
+    }
 
-  // Si le jour n'est pas encore arrivé → case verrouillée
-  if(i > currentDay){
-    dayDiv.classList.add("locked");
-    dayDiv.innerHTML = i + " 🔒";
-  } else {
-    dayDiv.textContent = i;
-    dayDiv.onclick = () => openPopup(i);
-  }
+    .day {
+        background: #b30000;
+        padding: 20px;
+        border-radius: 10px;
+        font-size: 1.5em;
+        cursor: pointer;
+        transition: 0.2s;
+        box-shadow: 0 0 10px #000;
+    }
 
-  calendar.appendChild(dayDiv);
-}
+    .day:hover {
+        transform: scale(1.07);
+        background: #ff3333;
+    }
 
-// Neige en fond
-(function(){
-  const count=80;
-  for(let i=0;i<count;i++){
-    const el=document.createElement('div');
-    el.className='snowflake';
-    el.textContent='❄';
-    el.style.left=Math.random()*100+'vw';
-    el.style.opacity=0.4+Math.random()*0.6;
-    el.style.fontSize=(8+Math.random()*18)+'px';
-    el.style.animationDuration=(6+Math.random()*8)+'s';
-    document.body.appendChild(el);
-  }
-})();
+    .locked {
+        background: #555 !important;
+        color: #ccc;
+        cursor: not-allowed !important;
+        filter: grayscale(100%);
+        opacity: 0.6;
+        text-shadow: none;
+    }
 
-// Popup
-function openPopup(day){
-  const box=document.getElementById('popupContent');
-  box.innerHTML='';
-  for(let i=0;i<30;i++){
-    const f=document.createElement('div');
-    f.className='popupSnowflake';
-    f.textContent='❄';
-    f.style.left=Math.random()*440+'px';
-    f.style.animationDuration=4+Math.random()*4+'s';
-    box.appendChild(f);
-  }
+    #popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        color: black;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px black;
+        width: 300px;
+        text-align: center;
+    }
+
+    #popup button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background: #b30000;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
 
 <h1>🎄 Calendrier de l'Avent 🎄</h1>
 
