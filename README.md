@@ -1,5 +1,3 @@
-<html lang="fr">
-<head>
 <meta charset="UTF-8">
 <title>🎄 Calendrier de l'Avent 🎄</title>
 <style>
@@ -21,94 +19,55 @@ h1 {
 }
 @keyframes glow { from { text-shadow: 0 0 10px red; } to { text-shadow: 0 0 25px yellow; } }
 
-.calendar-container {
-  max-height: 80vh;
-  overflow-y: auto;
-  margin:0 auto;
-}
-.calendar {
-  display: grid;
-  grid-template-columns: repeat(6, 150px);
-  gap: 15px;
-  justify-content: center;
-  margin: 20px auto;
-}
-.day {
-  background: #e63946;
-  width:150px;
-  height:150px;
-  cursor: pointer;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 1px 1px 2px #000;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.5);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-  position: relative;
-}
-.day::before {
-  content:'🎀';
-  position:absolute;
-  top:5px;
-  left:5px;
-  font-size:20px;
+// Date du jour réel
+const today = new Date();
+const currentDay = today.getDate(); // Numéro du jour : 1,2,3...
+
+// Générer les cases 1 à 24
+const calendar = document.getElementById('calendar');
+for(let i=1;i<=24;i++){
+  const dayDiv = document.createElement('div');
+  dayDiv.className = 'day';
+
+  // Si le jour n'est pas encore arrivé → case verrouillée
+  if(i > currentDay){
+    dayDiv.classList.add("locked");
+    dayDiv.innerHTML = i + " 🔒";
+  } else {
+    dayDiv.textContent = i;
+    dayDiv.onclick = () => openPopup(i);
+  }
+
+  calendar.appendChild(dayDiv);
 }
 
-.popup {
-  display:none;
-  position: fixed;
-  z-index: 9999;
-  left:50%;
-  top:50%;
-  transform: translate(-50%,-50%);
-  background:#fff4d9;
-  color:#000;
-  padding:22px;
-  border-radius:12px;
-  width:480px;
-  max-height:80vh;
-  overflow:auto;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-}
-.close {
-  margin-top:12px;
-  background:#e63946;
-  color:#fff;
-  border:none;
-  padding:8px 12px;
-  border-radius:6px;
-  cursor:pointer;
-}
-input[type='text']{padding:6px; width:70%;}
-a{ color:#064E3B; font-weight:bold; }
+// Neige en fond
+(function(){
+  const count=80;
+  for(let i=0;i<count;i++){
+    const el=document.createElement('div');
+    el.className='snowflake';
+    el.textContent='❄';
+    el.style.left=Math.random()*100+'vw';
+    el.style.opacity=0.4+Math.random()*0.6;
+    el.style.fontSize=(8+Math.random()*18)+'px';
+    el.style.animationDuration=(6+Math.random()*8)+'s';
+    document.body.appendChild(el);
+  }
+})();
 
-.popupSnowflake{
-  position:absolute;
-  top:-10px;
-  color:white;
-  user-select:none;
-  pointer-events:none;
-  font-size:14px;
-  animation:fallPopup 6s linear infinite;
-}
-@keyframes fallPopup{0%{transform:translateY(-10px)}100%{transform:translateY(300px)}}
-
-.snowflake{
-  position:fixed;
-  top:-10px;
-  color:white;
-  user-select:none;
-  pointer-events:none;
-  z-index:1;
-  font-size:16px;
-  animation:fallBackground 8s linear infinite;
-}
-@keyframes fallBackground{0%{transform:translateY(-10px)}100%{transform:translateY(110vh)}}
-</style>
-</head>
-<body>
+// Popup
+function openPopup(day){
+  const box=document.getElementById('popupContent');
+  box.innerHTML='';
+  for(let i=0;i<30;i++){
+    const f=document.createElement('div');
+    f.className='popupSnowflake';
+    f.textContent='❄';
+    f.style.left=Math.random()*440+'px';
+    f.style.animationDuration=4+Math.random()*4+'s';
+    box.appendChild(f);
+  }
 
 <h1>🎄 Calendrier de l'Avent 🎄</h1>
 
@@ -171,7 +130,7 @@ function openPopup(day){
       <p id='res2'></p>
       <p id='info2' style='display:none;'>TaToo météo a été déployé à l'échelle nationale sur environ 120 000 postes entre mars et mai 2025.</p>`; break;
     case 3: box.innerHTML+=`<h2>Jour 3</h2><p><strong style='color:red;'>Info du Jour</strong> Tous les ans l'ESI d'Orléans participe au Cross de Bercy. Bravo aux participants !</p>`; break;
-    case 4: box.innerHTML+=`<h2>Jour 4</h2><p><strong style='color:red;'>Quiz :</strong> Combien d’agneaux la DiSI CO a eu ce printemps ?</p>
+      case 4: box.innerHTML+=`<h2>Jour 4</h2><p>Le site des Marsauderies accueille chaque année des nouveaux moutons 🐑</p>
       <form id='quiz4'><label><input type='radio' name='ans4' value='1'> 1</label><br>
       <label><input type='radio' name='ans4' value='2'> 2</label><br>
       <label><input type='radio' name='ans4' value='3'> 3</label><br>
